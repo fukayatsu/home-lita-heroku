@@ -1,6 +1,10 @@
 require 'sinatra'
 require 'httparty'
 
+use Rack::Auth::Basic, "Restricted Area" do |username, password|
+  username == ENV["USERNAME"] and password == ENV["PASSWORD"]
+end
+
 get '/' do
   erb :index
 end
